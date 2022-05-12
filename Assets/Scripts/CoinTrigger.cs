@@ -1,10 +1,17 @@
+using System;
 using UnityEngine;
 
 public class CoinTrigger : MonoBehaviour
 {
-    [SerializeField] private CoinsManager _coinsManager;
-    [SerializeField] private GameManager _gameManager;
-    
+    private CoinsManager _coinsManager;
+    private GameManager _gameManager;
+
+    private void Start()
+    {
+        _coinsManager = FindObjectOfType<CoinsManager>();
+        _gameManager = FindObjectOfType<GameManager>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         PlayerMove player = other.GetComponent<PlayerMove>();
