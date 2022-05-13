@@ -68,7 +68,6 @@ public class CoinsManager : MonoBehaviour
             {
                 coin = _coinsList[i];
                 minDistance = distanceToCoin;
-                Debug.Log(coin.GetHashCode());
             }
         }
         return coin;

@@ -20,9 +20,16 @@ public class CameraMove : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        ChangeTransform(CountVectorsSum());
+        if (Mathf.Abs(Vector3.SqrMagnitude(CountVectorsSum() - Vector3.zero)) > 0.001)
+        {
+            ChangeTransform(CountVectorsSum());
+        }
+        else
+        {
+            ChangeTransform(Vector3.forward);
+        }
     }
 
     private void FixedUpdate()
@@ -36,7 +43,7 @@ public class CameraMove : MonoBehaviour
         Quaternion rotation = Quaternion.Lerp(
             transform.rotation, 
             Quaternion.LookRotation(direction), 
-            Time.deltaTime
+            Time.deltaTime * 10f
         );
 
         transform.rotation = rotation;
