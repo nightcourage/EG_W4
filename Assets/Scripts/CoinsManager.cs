@@ -11,7 +11,7 @@ public class CoinsManager : MonoBehaviour
     [Range(5, 50)]
     [SerializeField] private int coinsAmount;
     [SerializeField] private Ground _ground;
-    
+
     private List<Coin> _coinsList = new List<Coin>();
 
     private void Awake()
@@ -54,5 +54,23 @@ public class CoinsManager : MonoBehaviour
     public int GetLeftCoins()
     {
         return _coinsList.Count;
+    }
+    
+    public Coin FindClosestCoin(Transform pointer)
+    {
+        float minDistance = Mathf.Infinity;
+        Coin coin = null;
+        
+        for (int i = 0; i < _coinsList.Count; i++)
+        {
+            float distanceToCoin = Vector3.Distance(pointer.position, _coinsList[i].transform.position);
+            if (distanceToCoin < minDistance)
+            {
+                coin = _coinsList[i];
+                minDistance = distanceToCoin;
+                Debug.Log(coin.GetHashCode());
+            }
+        }
+        return coin;
     }
 }

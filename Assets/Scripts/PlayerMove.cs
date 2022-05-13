@@ -12,15 +12,12 @@ public class PlayerMove : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody.maxAngularVelocity = 500f;
     }
 
     private void FixedUpdate()
     {
-        _rigidbody.AddTorque(Input.GetAxis("Vertical") * _cameraCenter.transform.right * _torqueValue);
-        _rigidbody.AddTorque(Input.GetAxis("Horizontal") * -_cameraCenter.transform.forward * _torqueValue);
-    }
-
-    private void SetDirection()
-    {
+        _rigidbody.AddTorque(_cameraCenter.transform.right * (Input.GetAxis("Vertical") * _torqueValue));
+        _rigidbody.AddTorque(-_cameraCenter.transform.forward * (Input.GetAxis("Horizontal") * _torqueValue));
     }
 }
